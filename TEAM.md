@@ -12,7 +12,7 @@
 | STT | Họ tên | MSSV | Email | GitHub | Vai trò |
 | --: | ------ | ---- | ----- | ------ | ------- |
 |   1 | Bùi Nguyên Dũng | 2A202603587 | dung208042@gmail.com | https://github.com/Nesto08 | Single |
-|   2 | Hoàng Văn Bảo   | 2A202603549 | 26ai.baohv@vinuni.edu.vn | https://github.com/BaoAIuet | Orchestrator + Swarm |
+|   2 | Hoàng Văn Bảo   | 2A202603549 | 26ai.baohv@vinuni.edu.vn | https://github.com/BaoAIuet | Orchestrator |
 |   3 | Nguyễn Bá Quảng | 2A202603555 | nbquang04@gmail.com | https://github.com/nbquang04 | Workflow |
 
 Gợi ý chia vai:
@@ -26,7 +26,7 @@ Gợi ý chia vai:
 
 | Người | Vai | Commit | Test đã thêm hoặc sửa |
 | --- | --- | --- | --- |
-| | | | |
+| Nguyễn Bá Quảng | Phụ trách Shape A — Workflow: triển khai luồng xử lý claim, kiểm tra quyền, tính quote, gọi host hoàn tiền và ghi trace; đóng góp một phần vào research card R1 — Scaling (`report/team/research_card.md`) và thí nghiệm ablation workflow có/không có investigator. | `2b8a01d` (workflow và test); `2e68912` (báo cáo cá nhân); `3ad4d06` (đóng góp research card và ablation) | `src/tests/test_workflow.py::test_unknown_claim_has_trace_without_changing_ledger`; `src/tests/test_bonus_r1.py` (T02 seed 55, T13, T14, crash/resume T12). |
 
 ## Cá nhân
 
@@ -65,32 +65,29 @@ Sao chép mục dưới đây cho từng thành viên.
     - Crash Safety Suite: 20/20.
     - Commit:
 
-## MSSV_HoTen
+## 2A202603555_NguyenBaQuang
 
 
 ### Phần việc phụ trách
 
--
+- Phụ trách Shape A — Workflow trong `src/lab8/shapes/workflow.py`.
+- Bổ sung kiểm thử cho workflow và viết báo cáo cá nhân.
+- Đóng góp một phần vào research card R1 — Scaling và thí nghiệm so sánh workflow có/không có investigator chỉ đọc.
 
 ### Đóng góp cụ thể
 
--
+- Triển khai luồng xử lý claim theo thứ tự cố định: đọc claim, kiểm tra quyền xem order, tính quote bằng `compute_compensation`, gọi host qua `issue_refund` và trả kết quả có trace.
+- Xử lý các trường hợp claim không tồn tại, thiếu mã đơn, không tìm thấy đơn hoặc không có quyền xem, quote bằng 0 và kết quả chấp nhận/từ chối/conflict từ host.
+- Giữ nguyên quote đề xuất, để host kiểm tra approval, trần hoàn tiền theo đơn và idempotency; truyền `crash_at` xuống host để hỗ trợ kiểm thử crash/resume.
+- Ghi trace ở các nhánh trả kết quả, không ghi nội dung ticket thô, secret hoặc thông tin cá nhân; đóng kết nối cơ sở dữ liệu trong `finally`.
+- Thêm test cho claim không tồn tại, kiểm tra trạng thái trả về, trace hợp lệ và việc không thay đổi ledger hoặc tạo audit.
+- Đóng góp một phần vào nội dung research card R1, biến thể investigator chỉ đọc, kết quả benchmark ablation và các test hồi quy liên quan. Kết quả public ghi nhận pass rate không đổi, trong khi cost/success mô phỏng tăng khoảng 2,38 lần; kết luận giới hạn trong thiết lập MockLLM và bộ claim public của lab.
 
 ### Bằng chứng
 
--
-
-## MSSV_HoTen
-
-
-### Phần việc phụ trách
-
--
-
-### Đóng góp cụ thể
-
--
-
-### Bằng chứng
-
--
+- Code: `src/lab8/shapes/workflow.py`; biến thể ablation: `src/bonus/r1_investigator.py`.
+- Test: `src/tests/test_workflow.py::test_unknown_claim_has_trace_without_changing_ledger`; `src/tests/test_bonus_r1.py` kiểm tra T02 seed 55, T13, T14 và crash/resume T12.
+- Kết quả đã ghi nhận trong báo cáo cá nhân: 62 passed, 241 deselected cho ma trận student riêng workflow; 55 passed, 248 deselected cho bộ test mặc định tại thời điểm kiểm tra.
+- Kết quả ablation: mỗi cấu hình đạt 70/70 trial public; cost/success mô phỏng tăng từ 27,86 lên 66,24 VND khi thêm investigator. Dữ liệu lưu tại `src/reports/bonus_r1_ablation.json`.
+- Báo cáo: `report/team/2A202603555_NguyenBaQuang.md`; đóng góp chung: `report/team/research_card.md`.
+- Commit: `2b8a01d` (workflow và test), `2e68912` (báo cáo cá nhân), `3ad4d06` (đóng góp research card và ablation).
