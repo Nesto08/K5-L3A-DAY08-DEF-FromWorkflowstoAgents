@@ -1,0 +1,15 @@
+version: 1
+jitter_range_ms: 4
+operations:
+  get_claim_view:
+    base_ms: 8
+  lookup_order:
+    base_ms: 42
+  lookup_policy:
+    base_ms: 58
+  compute_compensation:
+    base_ms: 18
+  model_draft:
+    base_ms: 120
+  issue_refund:
+    base_ms: 35
