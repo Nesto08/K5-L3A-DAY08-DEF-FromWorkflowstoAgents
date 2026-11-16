@@ -1,0 +1,566 @@
+{
+  "source_benchmark": "reports/bonus_b1_benchmark.json",
+  "latency_model": "bonus/latency.yaml",
+  "latency_note": "Deterministic simulated latency; not measured wall-clock time.",
+  "controlled_variables": {
+    "as_of": "2026-11-15",
+    "seeds": [
+      11,
+      22,
+      33,
+      44,
+      55
+    ],
+    "claim_ids": [
+      "C-001",
+      "C-002",
+      "C-003",
+      "C-004",
+      "C-005",
+      "C-006",
+      "C-007",
+      "C-008",
+      "C-009",
+      "C-010",
+      "C-011",
+      "C-012",
+      "C-013",
+      "C-014"
+    ],
+    "pricing": {
+      "simulated": true,
+      "currency": "VND",
+      "input_per_1k_tokens_vnd": 20,
+      "output_per_1k_tokens_vnd": 80,
+      "tool_call_vnd": 10
+    },
+    "model_backend": "MockLLM",
+    "latency": "unavailable",
+    "isolation": "fresh_sqlite_per_trial"
+  },
+  "critical_path": {
+    "serial": {
+      "trials": 70,
+      "critical_path_mean_ms": 258.686,
+      "critical_path_p95_ms": 287
+    },
+    "parallel": {
+      "trials": 70,
+      "critical_path_mean_ms": 218.943,
+      "critical_path_p95_ms": 245
+    }
+  },
+  "mean_path_speedup": 1.1815,
+  "shape_metrics": {
+    "orchestrator": {
+      "trials": 70,
+      "pass_rate": 1.0,
+      "pass_5": 1.0,
+      "seed_variance": 0.0,
+      "cost_per_success_vnd": 37.36571428571428,
+      "mean_steps": 4.714285714285714,
+      "p95_steps": 5.0
+    },
+    "orchestrator_parallel": {
+      "trials": 70,
+      "pass_rate": 1.0,
+      "pass_5": 1.0,
+      "seed_variance": 0.0,
+      "cost_per_success_vnd": 37.36571428571428,
+      "mean_steps": 4.714285714285714,
+      "p95_steps": 5.0
+    }
+  },
+  "samples": [
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-001",
+      "seed": 11,
+      "serial_critical_path_ms": 282,
+      "parallel_critical_path_ms": 241
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-001",
+      "seed": 22,
+      "serial_critical_path_ms": 278,
+      "parallel_critical_path_ms": 237
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-001",
+      "seed": 33,
+      "serial_critical_path_ms": 276,
+      "parallel_critical_path_ms": 230
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-001",
+      "seed": 44,
+      "serial_critical_path_ms": 287,
+      "parallel_critical_path_ms": 245
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-001",
+      "seed": 55,
+      "serial_critical_path_ms": 283,
+      "parallel_critical_path_ms": 239
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-002",
+      "seed": 11,
+      "serial_critical_path_ms": 249,
+      "parallel_critical_path_ms": 208
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-002",
+      "seed": 22,
+      "serial_critical_path_ms": 245,
+      "parallel_critical_path_ms": 204
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-002",
+      "seed": 33,
+      "serial_critical_path_ms": 238,
+      "parallel_critical_path_ms": 192
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-002",
+      "seed": 44,
+      "serial_critical_path_ms": 248,
+      "parallel_critical_path_ms": 206
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-002",
+      "seed": 55,
+      "serial_critical_path_ms": 246,
+      "parallel_critical_path_ms": 202
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-003",
+      "seed": 11,
+      "serial_critical_path_ms": 282,
+      "parallel_critical_path_ms": 241
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-003",
+      "seed": 22,
+      "serial_critical_path_ms": 278,
+      "parallel_critical_path_ms": 237
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-003",
+      "seed": 33,
+      "serial_critical_path_ms": 276,
+      "parallel_critical_path_ms": 230
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-003",
+      "seed": 44,
+      "serial_critical_path_ms": 287,
+      "parallel_critical_path_ms": 245
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-003",
+      "seed": 55,
+      "serial_critical_path_ms": 283,
+      "parallel_critical_path_ms": 239
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-004",
+      "seed": 11,
+      "serial_critical_path_ms": 129,
+      "parallel_critical_path_ms": 129
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-004",
+      "seed": 22,
+      "serial_critical_path_ms": 129,
+      "parallel_critical_path_ms": 129
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-004",
+      "seed": 33,
+      "serial_critical_path_ms": 121,
+      "parallel_critical_path_ms": 121
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-004",
+      "seed": 44,
+      "serial_critical_path_ms": 131,
+      "parallel_critical_path_ms": 131
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-004",
+      "seed": 55,
+      "serial_critical_path_ms": 122,
+      "parallel_critical_path_ms": 122
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-005",
+      "seed": 11,
+      "serial_critical_path_ms": 231,
+      "parallel_critical_path_ms": 190
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-005",
+      "seed": 22,
+      "serial_critical_path_ms": 229,
+      "parallel_critical_path_ms": 188
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-005",
+      "seed": 33,
+      "serial_critical_path_ms": 224,
+      "parallel_critical_path_ms": 178
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-005",
+      "seed": 44,
+      "serial_critical_path_ms": 232,
+      "parallel_critical_path_ms": 190
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-005",
+      "seed": 55,
+      "serial_critical_path_ms": 228,
+      "parallel_critical_path_ms": 184
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-006",
+      "seed": 11,
+      "serial_critical_path_ms": 249,
+      "parallel_critical_path_ms": 208
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-006",
+      "seed": 22,
+      "serial_critical_path_ms": 245,
+      "parallel_critical_path_ms": 204
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-006",
+      "seed": 33,
+      "serial_critical_path_ms": 238,
+      "parallel_critical_path_ms": 192
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-006",
+      "seed": 44,
+      "serial_critical_path_ms": 248,
+      "parallel_critical_path_ms": 206
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-006",
+      "seed": 55,
+      "serial_critical_path_ms": 246,
+      "parallel_critical_path_ms": 202
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-007",
+      "seed": 11,
+      "serial_critical_path_ms": 282,
+      "parallel_critical_path_ms": 241
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-007",
+      "seed": 22,
+      "serial_critical_path_ms": 278,
+      "parallel_critical_path_ms": 237
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-007",
+      "seed": 33,
+      "serial_critical_path_ms": 276,
+      "parallel_critical_path_ms": 230
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-007",
+      "seed": 44,
+      "serial_critical_path_ms": 287,
+      "parallel_critical_path_ms": 245
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-007",
+      "seed": 55,
+      "serial_critical_path_ms": 283,
+      "parallel_critical_path_ms": 239
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-008",
+      "seed": 11,
+      "serial_critical_path_ms": 282,
+      "parallel_critical_path_ms": 241
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-008",
+      "seed": 22,
+      "serial_critical_path_ms": 278,
+      "parallel_critical_path_ms": 237
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-008",
+      "seed": 33,
+      "serial_critical_path_ms": 276,
+      "parallel_critical_path_ms": 230
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-008",
+      "seed": 44,
+      "serial_critical_path_ms": 287,
+      "parallel_critical_path_ms": 245
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-008",
+      "seed": 55,
+      "serial_critical_path_ms": 283,
+      "parallel_critical_path_ms": 239
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-009",
+      "seed": 11,
+      "serial_critical_path_ms": 249,
+      "parallel_critical_path_ms": 208
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-009",
+      "seed": 22,
+      "serial_critical_path_ms": 245,
+      "parallel_critical_path_ms": 204
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-009",
+      "seed": 33,
+      "serial_critical_path_ms": 238,
+      "parallel_critical_path_ms": 192
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-009",
+      "seed": 44,
+      "serial_critical_path_ms": 248,
+      "parallel_critical_path_ms": 206
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-009",
+      "seed": 55,
+      "serial_critical_path_ms": 246,
+      "parallel_critical_path_ms": 202
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-010",
+      "seed": 11,
+      "serial_critical_path_ms": 282,
+      "parallel_critical_path_ms": 241
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-010",
+      "seed": 22,
+      "serial_critical_path_ms": 278,
+      "parallel_critical_path_ms": 237
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-010",
+      "seed": 33,
+      "serial_critical_path_ms": 276,
+      "parallel_critical_path_ms": 230
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-010",
+      "seed": 44,
+      "serial_critical_path_ms": 287,
+      "parallel_critical_path_ms": 245
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-010",
+      "seed": 55,
+      "serial_critical_path_ms": 283,
+      "parallel_critical_path_ms": 239
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-011",
+      "seed": 11,
+      "serial_critical_path_ms": 282,
+      "parallel_critical_path_ms": 241
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-011",
+      "seed": 22,
+      "serial_critical_path_ms": 278,
+      "parallel_critical_path_ms": 237
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-011",
+      "seed": 33,
+      "serial_critical_path_ms": 276,
+      "parallel_critical_path_ms": 230
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-011",
+      "seed": 44,
+      "serial_critical_path_ms": 287,
+      "parallel_critical_path_ms": 245
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-011",
+      "seed": 55,
+      "serial_critical_path_ms": 283,
+      "parallel_critical_path_ms": 239
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-012",
+      "seed": 11,
+      "serial_critical_path_ms": 282,
+      "parallel_critical_path_ms": 241
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-012",
+      "seed": 22,
+      "serial_critical_path_ms": 278,
+      "parallel_critical_path_ms": 237
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-012",
+      "seed": 33,
+      "serial_critical_path_ms": 276,
+      "parallel_critical_path_ms": 230
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-012",
+      "seed": 44,
+      "serial_critical_path_ms": 287,
+      "parallel_critical_path_ms": 245
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-012",
+      "seed": 55,
+      "serial_critical_path_ms": 283,
+      "parallel_critical_path_ms": 239
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-013",
+      "seed": 11,
+      "serial_critical_path_ms": 282,
+      "parallel_critical_path_ms": 241
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-013",
+      "seed": 22,
+      "serial_critical_path_ms": 278,
+      "parallel_critical_path_ms": 237
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-013",
+      "seed": 33,
+      "serial_critical_path_ms": 276,
+      "parallel_critical_path_ms": 230
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-013",
+      "seed": 44,
+      "serial_critical_path_ms": 287,
+      "parallel_critical_path_ms": 245
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-013",
+      "seed": 55,
+      "serial_critical_path_ms": 283,
+      "parallel_critical_path_ms": 239
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-014",
+      "seed": 11,
+      "serial_critical_path_ms": 282,
+      "parallel_critical_path_ms": 241
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-014",
+      "seed": 22,
+      "serial_critical_path_ms": 278,
+      "parallel_critical_path_ms": 237
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-014",
+      "seed": 33,
+      "serial_critical_path_ms": 276,
+      "parallel_critical_path_ms": 230
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-014",
+      "seed": 44,
+      "serial_critical_path_ms": 287,
+      "parallel_critical_path_ms": 245
+    },
+    {
+      "shape": "orchestrator",
+      "claim_id": "C-014",
+      "seed": 55,
+      "serial_critical_path_ms": 283,
+      "parallel_critical_path_ms": 239
+    }
+  ]
+}

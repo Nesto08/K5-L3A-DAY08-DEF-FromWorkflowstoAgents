@@ -20,8 +20,13 @@ ones. `lab8.trace.Trace` does this; your own tracer is fine if it matches.
 
 from __future__ import annotations
 
-from lab8.schemas import RunResult
-from lab8.shapes.common import not_implemented
+from lab8.db import connect
+from lab8.durability import InjectedCrash, issue_refund
+from lab8.mock_llm import complete
+from lab8.runtime import run_react
+from lab8.schemas import Budget, RunResult, make_run_id
+from lab8.shapes.common import finish, safe_dump
+from lab8.trace import Trace
 
 
 def run_claim(
@@ -31,7 +36,111 @@ def run_claim(
     store_path: str,
     crash_at: str | None = None,
 ) -> RunResult:
-    # TODO CP2 (student): thay stub này bằng shape single theo các bước ở docstring đầu file.
-    # TODO CP3 (student): truyền crash_at vào durability.issue_refund, không bắt InjectedCrash.
-    del store_path, crash_at
-    return not_implemented("single", claim_id, seed)
+    conn = connect(store_path)
+    try:
+        return _run(conn, claim_id, seed=seed, crash_at=crash_at)
+    finally:
+        conn.close()
+
+
+def _run(conn, claim_id: str, *, seed: int, crash_at: str | None) -> RunResult:
+    budget = Budget()
+    run_id = make_run_id("single", claim_id, seed)
+    trace = Trace(run_id)
+
+    def decide(seen: dict):
+        last_tool = seen.get("last_tool")
+        last_result = seen.get("last_result")
+        if last_tool is None:
+            return {"tool": "get_claim_view", "args": {"claim_id": claim_id}}
+        if last_tool == "get_claim_view":
+            if not last_result.get("found"):
+                return {"final": {"status": "failed", "reason": "unknown_claim"}}
+            if not last_result.get("order_id"):
+                return {"final": {"status": "needs_info", "reason": "missing_order_id"}}
+            return {
+                "tool": "lookup_order",
+                "args": {"order_id": last_result.get("order_id"), "principal_id": last_result.get("principal_id")},
+            }
+        if last_tool == "lookup_order":
+            if not last_result.get("visible"):
+                return {"final": {"status": "escalated", "reason": last_result.get("reason")}}
+            return {"tool": "compute_compensation", "args": {"order": last_result["order"]}}
+        if last_tool == "compute_compensation":
+            proposal = int(last_result.get("amount_vnd", 0))
+            if proposal <= 0:
+                return {"final": {"status": "denied", "reason": last_result.get("reason")}}
+            return {"final": {"status": "quote_ready", "proposal": proposal}}
+        return {"final": {"status": "failed", "reason": "step_cap"}}
+
+    react = run_react(
+        conn,
+        budget,
+        observation={"claim": {"claim_id": claim_id}},
+        decide=decide,
+        max_steps=8,
+        worker=True,
+    )
+    final = react.get("final") or {"status": "failed", "reason": "step_cap"}
+    trace.add("react", safe_dump({"stopped": react.get("stopped"), "final": final, "observation": react.get("observation", {})}))
+
+    status = final.get("status")
+    if status == "quote_ready":
+        proposal = int(final.get("proposal", 0))
+        complete(budget, seed=seed, purpose="draft", prompt=f"proposal={proposal}")
+        try:
+            outcome = issue_refund(conn, claim_id, proposal, crash_at=crash_at)
+        except InjectedCrash:
+            trace.add("crash", {"at": crash_at})
+            trace.write()
+            raise
+        trace.add("issue_refund", safe_dump(outcome))
+        if not outcome["ok"]:
+            return finish(
+                conn,
+                shape="single",
+                claim_id=claim_id,
+                seed=seed,
+                status="failed" if outcome.get("conflict") else "denied",
+                proposal_amount=proposal,
+                budget=budget,
+                trace=trace,
+                error_reason=outcome["reason"],
+            )
+        return finish(
+            conn,
+            shape="single",
+            claim_id=claim_id,
+            seed=seed,
+            status="resolved",
+            proposal_amount=proposal,
+            budget=budget,
+            trace=trace,
+        )
+
+    complete(budget, seed=seed, purpose="draft", prompt=f"status={status}")
+    status_value = final.get("status")
+    if status_value in {"needs_info", "escalated", "denied"}:
+        return finish(
+            conn,
+            shape="single",
+            claim_id=claim_id,
+            seed=seed,
+            status=status_value,
+            proposal_amount=0,
+            budget=budget,
+            trace=trace,
+            error_reason=final.get("reason"),
+        )
+
+    return finish(
+        conn,
+        shape="single",
+        claim_id=claim_id,
+        seed=seed,
+        status="failed",
+        proposal_amount=0,
+        budget=budget,
+        trace=trace,
+        error_reason=final.get("reason", "step_cap"),
+    )
