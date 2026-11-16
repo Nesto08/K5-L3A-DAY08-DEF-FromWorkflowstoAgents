@@ -12,7 +12,7 @@
 | STT | Họ tên | MSSV | Email | GitHub | Vai trò |
 | --: | ------ | ---- | ----- | ------ | ------- |
 |   1 | Bùi Nguyên Dũng | 2A202603587 | dung208042@gmail.com | https://github.com/Nesto08 | Single |
-|   2 | Hoàng Văn Bảo   | 2A202603549 | 26ai.baohv@vinuni.edu.vn | https://github.com/BaoAIuet | Orchestrator |
+|   2 | Hoàng Văn Bảo   | 2A202603549 | 26ai.baohv@vinuni.edu.vn | https://github.com/BaoAIuet | Orchestrator + Investigator + B1 |
 |   3 | Nguyễn Bá Quảng | 2A202603555 | nbquang04@gmail.com | https://github.com/nbquang04 | Workflow |
 
 Gợi ý chia vai:
@@ -27,6 +27,7 @@ Gợi ý chia vai:
 | Người | Vai | Commit | Test đã thêm hoặc sửa |
 | --- | --- | --- | --- |
 | Nguyễn Bá Quảng | Phụ trách Shape A — Workflow: triển khai luồng xử lý claim, kiểm tra quyền, tính quote, gọi host hoàn tiền và ghi trace; đóng góp một phần vào research card R1 — Scaling (`report/team/research_card.md`) và thí nghiệm ablation workflow có/không có investigator. | `2b8a01d` (workflow và test); `2e68912` (báo cáo cá nhân); `3ad4d06` (đóng góp research card và ablation) | `src/tests/test_workflow.py::test_unknown_claim_has_trace_without_changing_ledger`; `src/tests/test_bonus_r1.py` (T02 seed 55, T13, T14, crash/resume T12). |
+| Hoàng Văn Bảo | Orchestrator + Investigator, bonus B1 | `bao@218709d` | `src/tests/test_bonus_b1_parallel.py` — 10 passed |
 
 ## Cá nhân
 
@@ -91,3 +92,24 @@ Sao chép mục dưới đây cho từng thành viên.
 - Kết quả ablation: mỗi cấu hình đạt 70/70 trial public; cost/success mô phỏng tăng từ 27,86 lên 66,24 VND khi thêm investigator. Dữ liệu lưu tại `src/reports/bonus_r1_ablation.json`.
 - Báo cáo: `report/team/2A202603555_NguyenBaQuang.md`; đóng góp chung: `report/team/research_card.md`.
 - Commit: `2b8a01d` (workflow và test), `2e68912` (báo cáo cá nhân), `3ad4d06` (đóng góp research card và ablation).
+
+## 2A202603549_HoangVanBao
+
+### Phần việc phụ trách
+
+- Phụ trách Shape C — Orchestrator + Investigator và bonus B1.
+- Giữ investigator ở quyền đọc-only; chỉ host được phép ghi refund vào ledger.
+
+### Đóng góp cụ thể
+
+- Triển khai orchestrator với handoff theo allowlist, quote bằng code và một lời gọi MockLLM để draft; output model không ảnh hưởng quote hoặc refund.
+- Thêm B1 chạy song song các lượt đọc độc lập `lookup_order` và `lookup_policy`; quote và refund vẫn tuần tự, mỗi worker dùng SQLite connection riêng.
+- Thêm seeded latency, critical-path estimator và test parity, thứ tự hoàn thành, latency, crash/resume.
+
+### Bằng chứng
+
+- Branch: `bao`
+- Files: `src/lab8/shapes/orchestrator.py`, `src/bonus/orchestrator_parallel.py`, `src/bonus/latency.py`, `src/bonus/critical_path.py`
+- Commit: `218709d`
+- Test `python -m pytest src/tests/test_bonus_b1_parallel.py`: 10 passed.
+- Public benchmark B1: 70/70 trial cho cả serial và parallel; critical-path latency là ước tính deterministic, không phải wall-clock.
