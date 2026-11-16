@@ -3,7 +3,7 @@
 Nhóm DEF chọn kiến trúc dựa trên benchmark cùng 14 claim public và 5 seed, kết hợp kiểm tra nghiệp vụ, retry và crash/resume.
 
 - Shape chọn: workflow
-- Commit hash: 6dbe62bgit add report/team/decision_adr.md
+- Commit hash: 6dbe62b
 - Run id dẫn chứng: R-workflow-C-001-s11; các trial còn lại nằm trong src/reports/benchmark.json
 - Pass rate / pass^5 / seed min-max / variance: 1.000 / 1.000 / 1.000–1.000 / 0.000000 (70/70 trial public)
 - Cost per success (mô phỏng, VND): 27.857142857142858 (xấp xỉ 27,86; src/reports/benchmark.json)
