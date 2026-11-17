@@ -6,7 +6,7 @@
 
 - **Tên nhóm:** DEF
 - **Thành viên:** Xem `TEAM.md`.
-- **Commit chốt (trùng `report/team/decision_adr.md`):** `35fbda3`
+- **Commit chốt (trùng `report/team/decision_adr.md`):** `6dbe62b`
 - **Repository:** https://github.com/Nesto08/K5-L3A-DAY08-DEF-FromWorkflowstoAgents
 
 ## 2. Mục tiêu và cách tiếp cận
