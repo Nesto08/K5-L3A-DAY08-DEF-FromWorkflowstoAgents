@@ -28,7 +28,7 @@ Gợi ý chia vai:
 | --- | --- | --- | --- |
 | Nguyễn Bá Quảng | Phụ trách Shape A — Workflow: triển khai luồng xử lý claim, kiểm tra quyền, tính quote, gọi host hoàn tiền và ghi trace; đóng góp một phần vào research card R1 — Scaling (`report/team/research_card.md`) và thí nghiệm ablation workflow có/không có investigator. | `2b8a01d` (workflow và test); `2e68912` (báo cáo cá nhân); `3ad4d06` (đóng góp research card và ablation) | `src/tests/test_workflow.py::test_unknown_claim_has_trace_without_changing_ledger`; `src/tests/test_bonus_r1.py` (T02 seed 55, T13, T14, crash/resume T12). |
 | Hoàng Văn Bảo | Orchestrator + Investigator, bonus B1 | `bao@218709d` | `src/tests/test_bonus_b1_parallel.py` — 10 passed |
-| Tên | Shape B — Single Agent (ReAct), CP2/CP3, Budget, Trace, host-only refund và crash safety | 2ae2846 (Single và báo cáo cá nhân) |
+| Tên | Shape B — Single Agent (ReAct), CP2/CP3, Budget, Trace, host-only refund và crash safety | 2ae2846 (Single và báo cáo cá nhân) | Thêm `src\tests\test_single_denied_no_refund.py`: 1 passed|
 
 ## Cá nhân
 
