@@ -17,8 +17,8 @@ Bài toán yêu cầu hệ thống xác minh thông tin claim và đơn hàng, k
 
 Nhóm phân chia công việc theo ba kiến trúc:
 
-- **Workflow (Shape A):** Nguyễn Bá Quang phụ trách, triển khai quy trình xử lý bằng Python theo các bước cố định.
-- **Single Agent (Shape B):** Bùi Nguyễn Dũng phụ trách, sử dụng vòng lặp ReAct để lựa chọn công cụ và xử lý claim.
+- **Workflow (Shape A):** Nguyễn Bá Quảng phụ trách, triển khai quy trình xử lý bằng Python theo các bước cố định.
+- **Single Agent (Shape B):** Bùi Nguyên Dũng phụ trách, sử dụng vòng lặp ReAct để lựa chọn công cụ và xử lý claim.
 - **Orchestrator (Shape C):** Hoàng Văn Bảo phụ trách, xây dựng cơ chế điều phối Investigator và handoff an toàn.
 - **Swarm (Shape D):** Sử dụng kiến trúc tham chiếu có sẵn trong lab để đối chiếu kết quả.
 
@@ -116,8 +116,8 @@ Chi tiết đóng góp được ghi trong `TEAM.md`, lịch sử commit và báo
 
 | Thành viên | Phần việc và bằng chứng |
 |---|---|
-| **Nguyễn Bá Quang — 2A202603555** | Shape A — Workflow; xử lý claim, trace và test. Tham gia research card R1 và ablation. File `workflow.py`, `test_workflow.py`. Commit `2b8a01d`, `2e68912`, `3ad4d06`. |
-| **Bùi Nguyễn Dũng — 2A202603587** | Shape B — Single Agent; tích hợp ReAct, Budget, Trace, host-only refund và crash safety. File `single.py`; bộ lọc Single Agent đạt 122 passed, T12 passed, Crash Safety 20/20. Branch `dung`. |
+| **Nguyễn Bá Quảng — 2A202603555** | Shape A — Workflow; xử lý claim, trace và test. Tham gia research card R1 và ablation. File `workflow.py`, `test_workflow.py`. Commit `2b8a01d`, `2e68912`, `3ad4d06`. |
+| **Bùi Nguyên Dũng — 2A202603587** | Shape B — Single Agent; tích hợp ReAct, Budget, Trace, host-only refund và crash safety. File `single.py`; bộ lọc Single Agent đạt 122 passed, T12 passed, Crash Safety 20/20. Branch `dung`. |
 | **Hoàng Văn Bảo — 2A202603549** | Shape C — Orchestrator, Investigator và bonus B1; xây dựng handoff an toàn, xử lý song song và kiểm thử. Commit `218709d`; bonus B1 có 10 test passed. |
 
 ## 7. Hạn chế và hướng cải thiện
