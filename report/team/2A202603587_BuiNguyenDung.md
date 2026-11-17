@@ -33,6 +33,7 @@ Phụ trách triển khai **Shape B — Single Agent (ReAct)** trong Lab Day 08 
 - Tách quyền ra quyết định của Agent khỏi quyền ghi tiền; chỉ host được phép gọi `durability.issue_refund()`.
 - Truyền `crash_at` vào `issue_refund()` và đảm bảo `InjectedCrash` được truyền ra ngoài để kiểm tra cơ chế phục hồi.
 - Sử dụng `finish()` và `Trace` để trả về kết quả theo đúng contract và ghi trace JSON.
+- Thêm `src\tests\test_single_denied_no_refund.py`
 
 **Quyết định kỹ thuật:**
 
